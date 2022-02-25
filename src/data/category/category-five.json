@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "image": "/assets/img/others/cow.png",
+    "title": "Beef",
+    "url": "/shop?category=beef"
+  },
+  {
+    "id": 2,
+    "image": "/assets/img/others/cow.png",
+    "title": "Mutton",
+    "url": "/shop?category=mutton"
+  },
+  {
+    "id": 3,
+    "image": "/assets/img/others/cow.png",
+    "title": "Chicken",
+    "url": "/shop?category=chicken"
+  }
+]

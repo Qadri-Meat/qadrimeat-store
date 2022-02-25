@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "We are The Meat Experts",
+    "subtitle": "Try out our Wholesome, Fresh & Trimmed Meat with Cashback Guarantee",
+    "image": "/assets/img/others/slider.jpg",
+    "url": "/shop"
+  },
+  {
+    "id": 2,
+    "title": "Unbelievably Delicious Meat",
+    "subtitle": "Bring out the best taste in your meals with our Fresh, Wholesome & Trimmed Meat",
+    "image": "/assets/img/others/slider.jpg",
+    "url": "/shop"
+  }
+]
