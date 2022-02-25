@@ -22,7 +22,7 @@ const TabProductNineteen = ({
       <div className="container">
         {/* section title */}
         <SectionTitleSeven
-          titleText="Products Collection"
+          titleText="Products"
           positionClass="text-center"
           borderClass="bottom-border"
           spaceClass="mb-30"

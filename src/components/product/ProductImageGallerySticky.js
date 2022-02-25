@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const productImageGallerySticky = ({ product }) => {
   return (
@@ -9,12 +9,12 @@ const productImageGallerySticky = ({ product }) => {
           {product.discount ? (
             <span className="pink">-{product.discount}%</span>
           ) : (
-            ""
+            ''
           )}
-          {product.new ? <span className="purple">New</span> : ""}
+          {product.new ? <span className="purple">New</span> : ''}
         </div>
       ) : (
-        ""
+        ''
       )}
       <div className="product-sticky-image mb--10">
         {product.image &&
@@ -22,7 +22,7 @@ const productImageGallerySticky = ({ product }) => {
             return (
               <div className="product-sticky-image__single mb-10" key={key}>
                 <img
-                  src={process.env.PUBLIC_URL + single}
+                  src={process.env.REACT_APP_API_URL + single}
                   alt=""
                   className="img-fluid"
                 />
@@ -35,7 +35,7 @@ const productImageGallerySticky = ({ product }) => {
 };
 
 productImageGallerySticky.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default productImageGallerySticky;

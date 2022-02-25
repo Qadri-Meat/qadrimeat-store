@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React from "react";
-import Swiper from "react-id-swiper";
+import PropTypes from 'prop-types';
+import React from 'react';
+import Swiper from 'react-id-swiper';
 
 const ProductImageGallerySlider = ({ product }) => {
   // swiper slider settings
@@ -9,8 +9,8 @@ const ProductImageGallerySlider = ({ product }) => {
     slidesPerView: 3,
     loop: true,
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
     renderPrevButton: () => (
       <button className="swiper-button-prev ht-swiper-button-nav">
@@ -24,18 +24,18 @@ const ProductImageGallerySlider = ({ product }) => {
     ),
     breakpoints: {
       1024: {
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       768: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       640: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       320: {
-        slidesPerView: 1
-      }
-    }
+        slidesPerView: 1,
+      },
+    },
   };
   return (
     <div className="product-large-image-wrapper product-large-image-wrapper--slider">
@@ -46,7 +46,7 @@ const ProductImageGallerySlider = ({ product }) => {
               <div key={key}>
                 <div className="single-image">
                   <img
-                    src={process.env.PUBLIC_URL + single}
+                    src={process.env.REACT_APP_API_URL + single}
                     className="img-fluid"
                     alt=""
                   />
@@ -60,7 +60,7 @@ const ProductImageGallerySlider = ({ product }) => {
 };
 
 ProductImageGallerySlider.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default ProductImageGallerySlider;

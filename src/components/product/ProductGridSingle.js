@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
-import { getDiscountPrice } from "../../helpers/product";
-import Rating from "./sub-components/ProductRating";
-import ProductModal from "./ProductModal";
+import PropTypes from 'prop-types';
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+import { getDiscountPrice } from '../../helpers/product';
+import Rating from './sub-components/ProductRating';
+import ProductModal from './ProductModal';
 
 const ProductGridSingle = ({
   product,
@@ -16,7 +16,7 @@ const ProductGridSingle = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -31,27 +31,27 @@ const ProductGridSingle = ({
     <Fragment>
       <div
         className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
-          sliderClassName ? sliderClassName : ""
+          sliderClassName ? sliderClassName : ''
         }`}
       >
         <div
-          className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
+          className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ''}`}
         >
           <div className="product-img">
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
               <img
                 className="default-img"
-                src={process.env.PUBLIC_URL + product.image[0]}
+                src={process.env.REACT_APP_API_URL + product.image[0]}
                 alt=""
               />
               {product.image.length > 1 ? (
                 <img
                   className="hover-img"
-                  src={process.env.PUBLIC_URL + product.image[1]}
+                  src={process.env.REACT_APP_API_URL + product.image[1]}
                   alt=""
                 />
               ) : (
-                ""
+                ''
               )}
             </Link>
             {product.discount || product.new ? (
@@ -59,23 +59,23 @@ const ProductGridSingle = ({
                 {product.discount ? (
                   <span className="pink">-{product.discount}%</span>
                 ) : (
-                  ""
+                  ''
                 )}
-                {product.new ? <span className="purple">New</span> : ""}
+                {product.new ? <span className="purple">New</span> : ''}
               </div>
             ) : (
-              ""
+              ''
             )}
 
             <div className="product-action">
               <div className="pro-same-action pro-wishlist">
                 <button
-                  className={wishlistItem !== undefined ? "active" : ""}
+                  className={wishlistItem !== undefined ? 'active' : ''}
                   disabled={wishlistItem !== undefined}
                   title={
                     wishlistItem !== undefined
-                      ? "Added to wishlist"
-                      : "Add to wishlist"
+                      ? 'Added to wishlist'
+                      : 'Add to wishlist'
                   }
                   onClick={() => addToWishlist(product, addToast)}
                 >
@@ -89,8 +89,8 @@ const ProductGridSingle = ({
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    {" "}
-                    Buy now{" "}
+                    {' '}
+                    Buy now{' '}
                   </a>
                 ) : product.variation && product.variation.length >= 1 ? (
                   <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
@@ -101,19 +101,19 @@ const ProductGridSingle = ({
                     onClick={() => addToCart(product, addToast)}
                     className={
                       cartItem !== undefined && cartItem.quantity > 0
-                        ? "active"
-                        : ""
+                        ? 'active'
+                        : ''
                     }
                     disabled={cartItem !== undefined && cartItem.quantity > 0}
                     title={
-                      cartItem !== undefined ? "Added to cart" : "Add to cart"
+                      cartItem !== undefined ? 'Added to cart' : 'Add to cart'
                     }
                   >
-                    {" "}
-                    <i className="pe-7s-cart"></i>{" "}
+                    {' '}
+                    <i className="pe-7s-cart"></i>{' '}
                     {cartItem !== undefined && cartItem.quantity > 0
-                      ? "Added"
-                      : "Add to cart"}
+                      ? 'Added'
+                      : 'Add to cart'}
                   </button>
                 ) : (
                   <button disabled className="active">
@@ -130,7 +130,7 @@ const ProductGridSingle = ({
           </div>
           <div className="product-content text-center">
             <h3>
-              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+              <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
                 {product.name}
               </Link>
             </h3>
@@ -139,12 +139,12 @@ const ProductGridSingle = ({
                 <Rating ratingValue={product.rating} />
               </div>
             ) : (
-              ""
+              ''
             )}
             <div className="product-price">
               {discountedPrice !== null ? (
                 <Fragment>
-                  <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "}
+                  <span>{currency.currencySymbol + finalDiscountedPrice}</span>{' '}
                   <span className="old">
                     {currency.currencySymbol + finalProductPrice}
                   </span>
@@ -187,7 +187,7 @@ ProductGridSingle.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingle;

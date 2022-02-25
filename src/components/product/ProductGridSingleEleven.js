@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
-import { getDiscountPrice } from "../../helpers/product";
-import ProductModal from "./ProductModal";
+import PropTypes from 'prop-types';
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+import { getDiscountPrice } from '../../helpers/product';
+import ProductModal from './ProductModal';
 
 const ProductGridSingleEleven = ({
   product,
@@ -17,7 +17,7 @@ const ProductGridSingleEleven = ({
   sliderClassName,
   spaceBottomClass,
   colorClass,
-  productGridStyleClass
+  productGridStyleClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -32,40 +32,40 @@ const ProductGridSingleEleven = ({
     <Fragment>
       <div
         className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 col-12 ${
-          sliderClassName ? sliderClassName : ""
+          sliderClassName ? sliderClassName : ''
         }`}
       >
         <div
           className={`product-wrap-10 ${
-            spaceBottomClass ? spaceBottomClass : ""
-          } ${colorClass ? colorClass : ""} ${
-            productGridStyleClass ? productGridStyleClass : ""
+            spaceBottomClass ? spaceBottomClass : ''
+          } ${colorClass ? colorClass : ''} ${
+            productGridStyleClass ? productGridStyleClass : ''
           } `}
         >
           <div className="product-img">
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
               <img
                 className="default-img img-fluid"
-                src={process.env.PUBLIC_URL + product.image[0]}
+                src={process.env.REACT_APP_API_URL + product.image[0]}
                 alt=""
               />
               {product.image.length > 1 ? (
                 <img
                   className="hover-img img-fluid"
-                  src={process.env.PUBLIC_URL + product.image[1]}
+                  src={process.env.REACT_APP_API_URL + product.image[1]}
                   alt=""
                 />
               ) : (
-                ""
+                ''
               )}
             </Link>
             {product.discount || product.new ? (
               <div className="product-img-badges">
-                {product.discount ? <span>-{product.discount}%</span> : ""}
-                {product.new ? <span>New</span> : ""}
+                {product.discount ? <span>-{product.discount}%</span> : ''}
+                {product.new ? <span>New</span> : ''}
               </div>
             ) : (
-              ""
+              ''
             )}
 
             <div className="product-action-2">
@@ -76,8 +76,8 @@ const ProductGridSingleEleven = ({
                   target="_blank"
                   title="Buy now"
                 >
-                  {" "}
-                  <i className="fa fa-shopping-cart"></i>{" "}
+                  {' '}
+                  <i className="fa fa-shopping-cart"></i>{' '}
                 </a>
               ) : product.variation && product.variation.length >= 1 ? (
                 <Link
@@ -91,16 +91,16 @@ const ProductGridSingleEleven = ({
                   onClick={() => addToCart(product, addToast)}
                   className={
                     cartItem !== undefined && cartItem.quantity > 0
-                      ? "active"
-                      : ""
+                      ? 'active'
+                      : ''
                   }
                   disabled={cartItem !== undefined && cartItem.quantity > 0}
                   title={
-                    cartItem !== undefined ? "Added to cart" : "Add to cart"
+                    cartItem !== undefined ? 'Added to cart' : 'Add to cart'
                   }
                 >
-                  {" "}
-                  <i className="fa fa-shopping-cart"></i>{" "}
+                  {' '}
+                  <i className="fa fa-shopping-cart"></i>{' '}
                 </button>
               ) : (
                 <button disabled className="active" title="Out of stock">
@@ -113,24 +113,24 @@ const ProductGridSingleEleven = ({
               </button>
 
               <button
-                className={compareItem !== undefined ? "active" : ""}
+                className={compareItem !== undefined ? 'active' : ''}
                 disabled={compareItem !== undefined}
                 title={
                   compareItem !== undefined
-                    ? "Added to compare"
-                    : "Add to compare"
+                    ? 'Added to compare'
+                    : 'Add to compare'
                 }
                 onClick={() => addToCompare(product, addToast)}
               >
                 <i className="fa fa-retweet"></i>
               </button>
               <button
-                className={wishlistItem !== undefined ? "active" : ""}
+                className={wishlistItem !== undefined ? 'active' : ''}
                 disabled={wishlistItem !== undefined}
                 title={
                   wishlistItem !== undefined
-                    ? "Added to wishlist"
-                    : "Add to wishlist"
+                    ? 'Added to wishlist'
+                    : 'Add to wishlist'
                 }
                 onClick={() => addToWishlist(product, addToast)}
               >
@@ -141,7 +141,7 @@ const ProductGridSingleEleven = ({
           <div className="product-content-2">
             <div className="title-price-wrap-2">
               <h3>
-                <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+                <Link to={process.env.PUBLIC_URL + '/product/' + product.id}>
                   {product.name}
                 </Link>
               </h3>
@@ -153,7 +153,7 @@ const ProductGridSingleEleven = ({
                     </span>
                     <span>
                       {currency.currencySymbol + finalDiscountedPrice}
-                    </span>{" "}
+                    </span>{' '}
                   </Fragment>
                 ) : (
                   <span>{currency.currencySymbol + finalProductPrice} </span>
@@ -195,7 +195,7 @@ ProductGridSingleEleven.propTypes = {
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
   colorClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleEleven;

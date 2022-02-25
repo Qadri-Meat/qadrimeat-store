@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const ProductImageFixed = ({ product }) => {
   return (
@@ -9,23 +9,23 @@ const ProductImageFixed = ({ product }) => {
           {product.discount ? (
             <span className="pink">-{product.discount}%</span>
           ) : (
-            ""
+            ''
           )}
-          {product.new ? <span className="purple">New</span> : ""}
+          {product.new ? <span className="purple">New</span> : ''}
         </div>
       ) : (
-        ""
+        ''
       )}
 
       <div className="product-fixed-image">
         {product.image ? (
           <img
-            src={process.env.PUBLIC_URL + product.image[0]}
+            src={process.env.REACT_APP_API_URL + product.image[0]}
             alt=""
             className="img-fluid"
           />
         ) : (
-          ""
+          ''
         )}
       </div>
     </div>
@@ -33,7 +33,7 @@ const ProductImageFixed = ({ product }) => {
 };
 
 ProductImageFixed.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default ProductImageFixed;

@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import React, { Fragment, useEffect, useState } from "react";
-import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
-import Swiper from "react-id-swiper";
+import PropTypes from 'prop-types';
+import React, { Fragment, useEffect, useState } from 'react';
+import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
+import Swiper from 'react-id-swiper';
 
 const ProductImageGallery = ({ product }) => {
   const [gallerySwiper, getGallerySwiper] = useState(null);
@@ -26,7 +26,7 @@ const ProductImageGallery = ({ product }) => {
     spaceBetween: 10,
     loopedSlides: 4,
     loop: true,
-    effect: "fade"
+    effect: 'fade',
   };
 
   const thumbnailSwiperParams = {
@@ -39,8 +39,8 @@ const ProductImageGallery = ({ product }) => {
     loop: true,
     slideToClickedSlide: true,
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
     renderPrevButton: () => (
       <button className="swiper-button-prev ht-swiper-button-nav">
@@ -51,7 +51,7 @@ const ProductImageGallery = ({ product }) => {
       <button className="swiper-button-next ht-swiper-button-nav">
         <i className="pe-7s-angle-right" />
       </button>
-    )
+    ),
   };
 
   return (
@@ -62,12 +62,12 @@ const ProductImageGallery = ({ product }) => {
             {product.discount ? (
               <span className="pink">-{product.discount}%</span>
             ) : (
-              ""
+              ''
             )}
-            {product.new ? <span className="purple">New</span> : ""}
+            {product.new ? <span className="purple">New</span> : ''}
           </div>
         ) : (
-          ""
+          ''
         )}
         <LightgalleryProvider>
           <Swiper {...gallerySwiperParams}>
@@ -77,7 +77,7 @@ const ProductImageGallery = ({ product }) => {
                   <div key={key}>
                     <LightgalleryItem
                       group="any"
-                      src={process.env.PUBLIC_URL + single}
+                      src={process.env.REACT_APP_API_URL + single}
                     >
                       <button>
                         <i className="pe-7s-expand1"></i>
@@ -85,7 +85,7 @@ const ProductImageGallery = ({ product }) => {
                     </LightgalleryItem>
                     <div className="single-image">
                       <img
-                        src={process.env.PUBLIC_URL + single}
+                        src={process.env.REACT_APP_API_URL + single}
                         className="img-fluid"
                         alt=""
                       />
@@ -104,7 +104,7 @@ const ProductImageGallery = ({ product }) => {
                 <div key={key}>
                   <div className="single-image">
                     <img
-                      src={process.env.PUBLIC_URL + single}
+                      src={process.env.REACT_APP_API_URL + single}
                       className="img-fluid"
                       alt=""
                     />
@@ -119,7 +119,7 @@ const ProductImageGallery = ({ product }) => {
 };
 
 ProductImageGallery.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default ProductImageGallery;
