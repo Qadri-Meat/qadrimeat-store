@@ -68,7 +68,7 @@ const ProductGridListSingle = ({
             )}
 
             <div className="product-action">
-              <div className="pro-same-action pro-wishlist">
+              {/* <div className="pro-same-action pro-wishlist">
                 <button
                   className={wishlistItem !== undefined ? 'active' : ''}
                   disabled={wishlistItem !== undefined}
@@ -81,7 +81,7 @@ const ProductGridListSingle = ({
                 >
                   <i className="pe-7s-like" />
                 </button>
-              </div>
+              </div> */}
               <div className="pro-same-action pro-cart">
                 {product.affiliateLink ? (
                   <a
@@ -121,11 +121,11 @@ const ProductGridListSingle = ({
                   </button>
                 )}
               </div>
-              <div className="pro-same-action pro-quickview">
+              {/* <div className="pro-same-action pro-quickview">
                 <button onClick={() => setModalShow(true)} title="Quick View">
                   <i className="pe-7s-look" />
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="product-content text-center">

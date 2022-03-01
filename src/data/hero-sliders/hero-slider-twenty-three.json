@@ -1,16 +1,16 @@
 [
   {
     "id": 1,
-    "title": "2020 Latest Collection",
-    "subtitle": "-30% Offer All <br /> Pet Food.",
-    "image": "/assets/img/slider/slider-23.jpg",
+    "title": "Unbelievably Delicious Meat",
+    "subtitle": "Try out our Wholesome, Fresh & Trimmed Meat with Cashback Guarantee",
+    "image": "/assets/img/others/slider1.png",
     "url": "/shop"
   },
   {
     "id": 2,
-    "title": "2020 Latest Collection",
-    "subtitle": "-40% Offer All <br /> Pet Food.",
-    "image": "/assets/img/slider/slider-23.jpg",
+    "title": "The Meat Experts",
+    "subtitle": "Give your meals a superb taste with the best meat in town",
+    "image": "/assets/img/others/slider2.png",
     "url": "/shop"
   }
 ]

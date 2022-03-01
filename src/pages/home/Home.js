@@ -26,14 +26,7 @@ const Home = () => {
         <BannerTwentyOne spaceTopClass="pt-60" spaceBottomClass="pb-60" />
         {/* tab product */}
         <TabProductSix category="" />
-        {/* banner */}
-        <BannerTwentyTwo spaceTopClass="pt-95" />
-        {/* countdown */}
-        <CountDownThree
-          spaceTopClass="pt-95"
-          dateTime="November 13, 2021 12:12:00"
-          countDownImage="/assets/img/banner/deal-8.jpg"
-        />
+
         {/* featured icon */}
         <FeatureIconTwo spaceTopClass="pt-100" spaceBottomClass="pb-60" />
         {/* image slider */}

@@ -8,6 +8,7 @@ class OrderService {
     return api.get(`orders/${id}`);
   }
   create(data) {
+    console.log(data);
     return api.post(`orders`, data);
   }
 }

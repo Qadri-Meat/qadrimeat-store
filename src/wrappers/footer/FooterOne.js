@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { animateScroll } from "react-scroll";
-import FooterCopyright from "../../components/footer/FooterCopyright";
-import FooterNewsletter from "../../components/footer/FooterNewsletter";
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { animateScroll } from 'react-scroll';
+import FooterCopyright from '../../components/footer/FooterCopyright';
+import FooterNewsletter from '../../components/footer/FooterNewsletter';
 
 const FooterOne = ({
   backgroundColorClass,
@@ -13,16 +13,16 @@ const FooterOne = ({
   spaceRightClass,
   containerClass,
   extraFooterClass,
-  sideMenu
+  sideMenu,
 }) => {
   const [scroll, setScroll] = useState(0);
   const [top, setTop] = useState(0);
 
   useEffect(() => {
     setTop(100);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -37,29 +37,49 @@ const FooterOne = ({
   return (
     <footer
       className={`footer-area ${
-        backgroundColorClass ? backgroundColorClass : ""
-      } ${spaceTopClass ? spaceTopClass : ""} ${
-        spaceBottomClass ? spaceBottomClass : ""
-      } ${extraFooterClass ? extraFooterClass : ""} ${
-        spaceLeftClass ? spaceLeftClass : ""
-      } ${spaceRightClass ? spaceRightClass : ""}`}
+        backgroundColorClass ? backgroundColorClass : ''
+      } ${spaceTopClass ? spaceTopClass : ''} ${
+        spaceBottomClass ? spaceBottomClass : ''
+      } ${extraFooterClass ? extraFooterClass : ''} ${
+        spaceLeftClass ? spaceLeftClass : ''
+      } ${spaceRightClass ? spaceRightClass : ''}`}
     >
-      <div className={`${containerClass ? containerClass : "container"}`}>
+      <div className={`${containerClass ? containerClass : 'container'}`}>
         <div className="row">
           <div
             className={`${
-              sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
+              sideMenu ? 'col-xl-5 col-sm-8' : 'col-lg-4 col-sm-10'
             }`}
           >
+            <div className="p-1">
+              <i className="fa fa-phone" style={{ paddingRight: '8px' }} />
+              <span>+92 304 4014345</span>
+            </div>
+            <div className="p-1">
+              <i className="fa fa-envelope" style={{ paddingRight: '8px' }} />
+              <span>
+                <a href="mailto:qadrimeat@gmail.com">qadrimeat@gmail.com</a>
+              </span>
+            </div>
+            <div className="p-1">
+              <i
+                className="fa fa-map-marker"
+                style={{ paddingRight: '13px' }}
+              />
+              <span>
+                Street 113, Sector N Dha Phase 1, Lahore, Punjab 54030,
+                Pakistan.
+              </span>
+            </div>
             {/* footer copyright */}
             <FooterCopyright
               footerLogo="/assets/img/logo/logo.png"
-              spaceBottomClass="mb-30"
+              spaceBottomClass=""
             />
           </div>
           <div
             className={`${
-              sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
+              sideMenu ? 'col-xl-2 col-sm-4' : 'col-lg-2 col-sm-4'
             }`}
           >
             <div className="footer-widget mb-30 ml-30">
@@ -69,21 +89,11 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "/about"}>About us</Link>
+                    <Link to={process.env.PUBLIC_URL + '/about'}>About us</Link>
                   </li>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>
-                      Store location
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "/contact"}>
+                    <Link to={process.env.PUBLIC_URL + '/contact'}>
                       Contact
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>
-                      Orders tracking
                     </Link>
                   </li>
                 </ul>
@@ -92,14 +102,14 @@ const FooterOne = ({
           </div>
           <div
             className={`${
-              sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
+              sideMenu ? 'col-xl-2 col-sm-4' : 'col-lg-2 col-sm-4'
             }`}
           >
             <div
               className={`${
                 sideMenu
-                  ? "footer-widget mb-30 ml-95"
-                  : "footer-widget mb-30 ml-50"
+                  ? 'footer-widget mb-30 ml-95'
+                  : 'footer-widget mb-30 ml-50'
               }`}
             >
               <div className="footer-title">
@@ -108,96 +118,60 @@ const FooterOne = ({
               <div className="footer-list">
                 <ul>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>Returns</Link>
+                    <Link to={process.env.PUBLIC_URL + '#/'}>Returns</Link>
                   </li>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>
+                    <Link to={process.env.PUBLIC_URL + '#/'}>
                       Support Policy
                     </Link>
                   </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>Size guide</Link>
-                  </li>
-                  <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>FAQs</Link>
-                  </li>
                 </ul>
               </div>
             </div>
           </div>
+
           <div
             className={`${
-              sideMenu ? "col-xl-3 col-sm-4" : "col-lg-2 col-sm-6"
+              sideMenu ? 'col-xl-3 col-sm-8' : 'col-lg-4 col-sm-6'
             }`}
           >
-            <div
-              className={`${
-                sideMenu
-                  ? "footer-widget mb-30 ml-145"
-                  : "footer-widget mb-30 ml-75"
-              }`}
-            >
-              <div className="footer-title">
-                <h3>FOLLOW US</h3>
-              </div>
-              <div className="footer-list">
+            <div className="">
+              <div className="contact-social text-center">
+                <h3>Follow Us</h3>
                 <ul>
                   <li>
-                    <a
-                      href="//www.facebook.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Facebook
+                    <a href="//facebook.com">
+                      <i className="fa fa-facebook" />
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="//www.twitter.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Twitter
+                    <a href="//pinterest.com">
+                      <i className="fa fa-pinterest-p" />
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="//www.instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Instagram
+                    <a href="//thumblr.com">
+                      <i className="fa fa-tumblr" />
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="//www.youtube.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Youtube
+                    <a href="//vimeo.com">
+                      <i className="fa fa-vimeo" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="//twitter.com">
+                      <i className="fa fa-twitter" />
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-          </div>
-          <div
-            className={`${
-              sideMenu ? "col-xl-3 col-sm-8" : "col-lg-4 col-sm-6"
-            }`}
-          >
-            {/* footer newsletter */}
-            <FooterNewsletter
-              spaceBottomClass="mb-30"
-              spaceLeftClass="ml-70"
-              sideMenu={sideMenu}
-            />
           </div>
         </div>
       </div>
       <button
-        className={`scroll-top ${scroll > top ? "show" : ""}`}
+        className={`scroll-top ${scroll > top ? 'show' : ''}`}
         onClick={() => scrollToTop()}
       >
         <i className="fa fa-angle-double-up"></i>
@@ -214,7 +188,7 @@ FooterOne.propTypes = {
   spaceBottomClass: PropTypes.string,
   spaceTopClass: PropTypes.string,
   spaceLeftClass: PropTypes.string,
-  spaceRightClass: PropTypes.string
+  spaceRightClass: PropTypes.string,
 };
 
 export default FooterOne;

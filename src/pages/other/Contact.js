@@ -27,9 +27,9 @@ const Contact = ({ location }) => {
         <Breadcrumb />
         <div className="contact-area pt-100 pb-100">
           <div className="container">
-            <div className="contact-map mb-10">
+            {/* <div className="contact-map mb-10">
               <LocationMap latitude="47.444" longitude="-122.176" />
-            </div>
+            </div> */}
             <div className="custom-row-2">
               <div className="col-lg-4 col-md-5">
                 <div className="contact-info-wrap">
@@ -38,23 +38,17 @@ const Contact = ({ location }) => {
                       <i className="fa fa-phone" />
                     </div>
                     <div className="contact-info-dec">
-                      <p>+012 345 678 102</p>
-                      <p>+012 345 678 102</p>
+                      <p>+92 304 4014345</p>
                     </div>
                   </div>
                   <div className="single-contact-info">
                     <div className="contact-icon">
-                      <i className="fa fa-globe" />
+                      <i className="fa fa-envelope" />
                     </div>
                     <div className="contact-info-dec">
                       <p>
-                        <a href="mailto:yourname@email.com">
-                          yourname@email.com
-                        </a>
-                      </p>
-                      <p>
-                        <a href="https://yourwebsitename.com">
-                          yourwebsitename.com
+                        <a href="mailto:qadrimeat@gmail.com">
+                          qadrimeat@gmail.com
                         </a>
                       </p>
                     </div>
@@ -64,8 +58,10 @@ const Contact = ({ location }) => {
                       <i className="fa fa-map-marker" />
                     </div>
                     <div className="contact-info-dec">
-                      <p>Address goes here, </p>
-                      <p>street, Crossroad 123.</p>
+                      <p>
+                        Street 113, Sector N Dha Phase 1, Lahore, Punjab 54030,
+                        Pakistan.
+                      </p>
                     </div>
                   </div>
                   <div className="contact-social text-center">

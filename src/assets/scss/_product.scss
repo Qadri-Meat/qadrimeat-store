@@ -244,6 +244,8 @@
 
 .product-wrap,
 .product-list-image-wrap {
+  
+  box-shadow: 1px 1px 18px #d2d2d2;
   position: relative;
   .product-img {
     position: relative;
@@ -332,7 +334,7 @@
       .pro-cart {
         font-size: 14px;
 
-        width: calc(100% - 48px - 48px);
+        width: calc(100%);
 
         transition-delay: 0.1s;
       }
@@ -1406,12 +1408,14 @@
 
 .product-wrap-2 {
   position: relative;
-
+  box-shadow: 1px 1px 18px #d2d2d2;
   overflow: hidden;
   .product-img {
     position: relative;
     img {
       width: 100%;
+      height: 200px;
+      object-fit: cover;
     }
     span {
       font-size: 14px;
@@ -1525,7 +1529,7 @@
   .product-content-2 {
     display: flex;
     justify-content: space-between;
-
+    padding: 0px 10px 10px 10px;
     margin: 20px 0 0;
     .title-price-wrap-2 {
       h3 {

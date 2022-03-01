@@ -122,7 +122,7 @@
           padding: 15px 35px 17px;
         }
         &:hover {
-          color: #fff;
+          color: #010101;
           border: 1px solid $theme-color;
         }
       }
@@ -482,7 +482,7 @@
     margin-bottom: 0;
     margin-left: 135px;
 
-    color: #000000;
+    color: #2C3333;
     @media #{$xs-layout} {
       margin-left: 0;
     }
@@ -522,13 +522,16 @@
       }
     }
   }
+  h2 {
+    color: #2C3333;
+  }
   h1 {
     font-size: 72px;
     line-height: 97px;
 
     margin: 6px 0 37px;
 
-    color: #010101;
+    color: #fff;
     @media #{$xl-layout} {
       font-size: 60px;
       line-height: 80px;
@@ -733,6 +736,7 @@
 }
 
 .single-slider-2 {
+  background-color: #bbc3c3;
   @media #{$xl-layout} {
     background-position: 50%;
   }

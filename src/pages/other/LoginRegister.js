@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import MetaTags from 'react-meta-tags';
 import { Link } from 'react-router-dom';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
@@ -7,14 +8,45 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import LayoutOne from '../../layouts/LayoutOne';
 import Breadcrumb from '../../wrappers/breadcrumb/Breadcrumb';
-
-const LoginRegister = ({ location }) => {
+import { login, register } from '../../redux/actions/authActions';
+import { useToasts } from 'react-toast-notifications';
+const LoginRegister = ({ location, history }) => {
   const { pathname } = location;
+  const { addToast } = useToasts();
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
 
+  const { user } = useSelector((state) => state.authData);
+
+  const redirect = location.search ? location.search.split('=')[1] : '/';
+
+  useEffect(() => {
+    if (user) {
+      history.push(redirect);
+    }
+  }, [history, user, redirect]);
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    dispatch(login({ phone, password }, addToast));
+  };
+
+  const registerHandler = (e) => {
+    e.preventDefault();
+    dispatch(register({ username, phone, password }, addToast));
+  };
+
+  const switchButtonHandler = (e) => {
+    setPhone('');
+    setUsername('');
+    setPassword('');
+  };
   return (
     <Fragment>
       <MetaTags>
-        <title>Qadri Meat | Login</title>
+        <title>tap-o | Login</title>
         <meta
           name="description"
           content="Compare page of flone react minimalist eCommerce template."
@@ -35,12 +67,18 @@ const LoginRegister = ({ location }) => {
                   <Tab.Container defaultActiveKey="login">
                     <Nav variant="pills" className="login-register-tab-list">
                       <Nav.Item>
-                        <Nav.Link eventKey="login">
+                        <Nav.Link
+                          eventKey="login"
+                          onClick={switchButtonHandler}
+                        >
                           <h4>Login</h4>
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="register">
+                        <Nav.Link
+                          eventKey="register"
+                          onClick={switchButtonHandler}
+                        >
                           <h4>Register</h4>
                         </Nav.Link>
                       </Nav.Item>
@@ -49,22 +87,33 @@ const LoginRegister = ({ location }) => {
                       <Tab.Pane eventKey="login">
                         <div className="login-form-container">
                           <div className="login-register-form">
-                            <form>
+                            <form onSubmit={loginHandler}>
                               <input
-                                type="text"
-                                name="user-name"
-                                placeholder="Username"
+                                type="tel"
+                                name="phone"
+                                placeholder="Phone"
+                                required
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                               />
                               <input
                                 type="password"
-                                name="user-password"
+                                name="password"
                                 placeholder="Password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                               />
                               <div className="button-box">
                                 <div className="login-toggle-btn">
                                   <input type="checkbox" />
                                   <label className="ml-10">Remember me</label>
-                                  <Link to={process.env.PUBLIC_URL + '/'}>
+                                  <Link
+                                    to={
+                                      process.env.PUBLIC_URL +
+                                      '/forgot-password'
+                                    }
+                                  >
                                     Forgot Password?
                                   </Link>
                                 </div>
@@ -79,21 +128,30 @@ const LoginRegister = ({ location }) => {
                       <Tab.Pane eventKey="register">
                         <div className="login-form-container">
                           <div className="login-register-form">
-                            <form>
+                            <form onSubmit={registerHandler}>
                               <input
                                 type="text"
                                 name="user-name"
                                 placeholder="Username"
+                                required
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                              />
+                              <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Phone"
+                                required
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                               />
                               <input
                                 type="password"
-                                name="user-password"
+                                name="password"
                                 placeholder="Password"
-                              />
-                              <input
-                                name="user-email"
-                                placeholder="Email"
-                                type="email"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                               />
                               <div className="button-box">
                                 <button type="submit">

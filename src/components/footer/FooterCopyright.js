@@ -23,7 +23,7 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass, colorClass }) => {
         >
           Qadri Meat
         </a>
-        .<br /> All Rights Reserved
+        . All Rights Reserved
       </p>
     </div>
   );

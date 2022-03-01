@@ -1,19 +1,19 @@
 [
   {
     "id": 1,
-    "image": "/assets/img/banner/banner29.jpg",
+    "image": "/assets/img/others/chicken.jpeg",
     "title": "Chicken",
     "link": "/shop?category=chicken"
   },
   {
     "id": 2,
-    "image": "/assets/img/banner/banner30.jpg",
+    "image": "/assets/img/others/mutton.jpeg",
     "title": "Mutton",
     "link": "/shop?category=mutton"
   },
   {
     "id": 3,
-    "image": "/assets/img/banner/banner31.jpg",
+    "image": "/assets/img/others/beef.jpeg",
     "title": "Beef",
     "link": "/shop?category=beef"
   }
