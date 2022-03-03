@@ -16,7 +16,7 @@ const orderReducer = (state = initState, action) => {
       console.log('totalPrice', action.payload.totalPrice);
       return { loading: false, selectedOrder: action.payload };
     case CREATE_ORDER_SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, success: true, selectedOrder: action.payload };
     case GET_ORDERS_SUCCESS:
       return { loading: false, ...action.payload };
     case ORDER_RESET:

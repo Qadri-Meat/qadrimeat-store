@@ -28,6 +28,7 @@ const authDataFromStorage = localStorage.getItem('authData')
   : {};
 
 const initialState = {
+  ...load(),
   authData: authDataFromStorage,
 };
 const store = createStore(rootReducer, initialState, devTools);

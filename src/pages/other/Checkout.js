@@ -43,7 +43,9 @@ const Checkout = ({ location, cartItems, currency, history }) => {
     ? JSON.parse(localStorage.getItem('shippingDetails'))
     : {};
   delete shippingDetails.notes;
-  const { success, order, loading } = useSelector((state) => state.orderData);
+  const { success, selectedOrder, loading } = useSelector(
+    (state) => state.orderData
+  );
   const {
     register,
     handleSubmit,
@@ -62,7 +64,7 @@ const Checkout = ({ location, cartItems, currency, history }) => {
   useEffect(() => {
     if (success) {
       dispatch({ type: ORDER_RESET });
-      history.push(`/order/${order.id}`);
+      history.push(`/order/${selectedOrder.id}`);
     }
   }, [history, success]);
 
