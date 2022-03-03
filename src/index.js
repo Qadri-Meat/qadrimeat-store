@@ -26,16 +26,9 @@ const devTools =
 const authDataFromStorage = localStorage.getItem('authData')
   ? JSON.parse(localStorage.getItem('authData'))
   : {};
-const shippingDetailsFromStorage = localStorage.getItem('shippingDetails')
-  ? JSON.parse(localStorage.getItem('shippingDetails'))
-  : {};
-delete shippingDetailsFromStorage.notes;
+
 const initialState = {
-  ...load(),
   authData: authDataFromStorage,
-  orderData: {
-    shippingDetails: shippingDetailsFromStorage,
-  },
 };
 const store = createStore(rootReducer, initialState, devTools);
 

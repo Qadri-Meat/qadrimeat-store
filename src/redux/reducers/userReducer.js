@@ -5,7 +5,7 @@ import {
   GET_PROFILE_SUCCESS,
 } from '../actions/userActions';
 
-const initState = { user: {}, address: {} };
+const initState = {};
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
@@ -13,10 +13,8 @@ const userReducer = (state = initState, action) => {
       return { success: true };
     case GET_USER_SUCCESS:
       return { user: action.payload };
-    case GET_PROFILE_SUCCESS:
-      return { ...state, user: action.payload };
     case USER_RESET:
-      return initState;
+      return {};
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MetaTags from 'react-meta-tags';
@@ -8,21 +8,20 @@ import LayoutOne from '../../layouts/LayoutOne';
 import Breadcrumb from '../../wrappers/breadcrumb/Breadcrumb';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
-import { fetchOrder } from '../../redux/actions/orderActions';
+import { getOrder } from '../../redux/actions/orderActions';
+import { getDiscountPrice } from '../../helpers/product';
 
 const Order = ({ location, currency, match, history }) => {
   const { pathname } = location;
   const orderId = match.params.id;
   const { addToast } = useToasts();
   const dispatch = useDispatch();
-  const { order } = useSelector((state) => state.orderData);
+  const { selectedOrder } = useSelector((state) => state.orderData);
   const { user } = useSelector((state) => state.authData);
 
   useEffect(() => {
-    if (!order || order.id !== orderId) {
-      dispatch(fetchOrder(orderId, addToast));
-    }
-  }, [dispatch, history, orderId, order, user]);
+    dispatch(getOrder(orderId, addToast));
+  }, [dispatch, history, orderId, user]);
 
   return (
     <Fragment>
@@ -44,62 +43,84 @@ const Order = ({ location, currency, match, history }) => {
         <Breadcrumb />
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
-            {order ? (
+            {selectedOrder ? (
               <Fragment>
                 <div className="row pb-20">
                   <div className="col-md-6">
                     <h3>Shipping Details</h3>
                     <p>
-                      <strong>Name: </strong> {order.shippingDetails.firstName}{' '}
-                      {order.shippingDetails.lastName}
+                      <strong>Name: </strong>{' '}
+                      {selectedOrder.shippingDetails.firstName}{' '}
+                      {selectedOrder.shippingDetails.lastName}
                     </p>
                     <p>
-                      <strong>Email: </strong>{' '}
-                      <a href={`mailto:${order.shippingDetails.email}`}>
-                        {order.shippingDetails.email}
-                      </a>
+                      <strong>Phone: </strong>{' '}
+                      {selectedOrder.shippingDetails.phone}
                     </p>
                     <p>
                       <strong>Address: </strong>
-                      {order.shippingDetails.address},{' '}
-                      {order.shippingDetails.city}{' '}
-                      {order.shippingDetails.postalCode},{' '}
-                      {order.shippingDetails.country}
+                      {selectedOrder.shippingDetails.address},{' '}
+                      {selectedOrder.shippingDetails.city}{' '}
+                      {selectedOrder.shippingDetails.postalCode},{' '}
+                      {selectedOrder.shippingDetails.country}
                     </p>
                   </div>
                   <div className="col-md-6">
-                    <h3>Payment Details</h3>
+                    <h3>Order Status</h3>
 
-                    <p>
-                      <strong>Method: </strong>
-                      {order.paymentMethod}
-                    </p>
-
-                    {order.isPaid ? (
+                    {selectedOrder.isPaid ? (
                       <p>
-                        <strong>Payment Status: </strong>Paid on{' '}
-                        {order.paidAt.substring(0, 10)}
+                        <strong>Paid: </strong>
+                        <i
+                          className="fa fa-check"
+                          style={{ color: 'green' }}
+                        ></i>
                       </p>
                     ) : (
                       <p>
-                        <strong>Payment Status: </strong>Not Paid
+                        <strong>Paid: </strong>
+                        <i className="fa fa-times" style={{ color: 'red' }}></i>
                       </p>
                     )}
-                    {order.isDelivered ? (
+                    {selectedOrder.approvedAt ? (
                       <p>
-                        <strong>Delivery Status: </strong>Delivered on{' '}
-                        {order.deliveredAt.substring(0, 10)}
+                        <strong>Approved on: </strong>
+                        {new Date(
+                          selectedOrder.approvedAt
+                        ).toLocaleDateString()}
+                        ,{' '}
+                        {new Date(
+                          selectedOrder.approvedAt
+                        ).toLocaleTimeString()}
                       </p>
                     ) : (
                       <p>
-                        <strong>Delivery Status: </strong>Not Delivered
+                        <strong>Approved: </strong>
+                        <i className="fa fa-times" style={{ color: 'red' }}></i>
+                      </p>
+                    )}
+                    {selectedOrder.deliveredAt ? (
+                      <p>
+                        <strong>Delivered on: </strong>
+                        {new Date(
+                          selectedOrder.deliveredAt
+                        ).toLocaleDateString()}
+                        ,{' '}
+                        {new Date(
+                          selectedOrder.deliveredAt
+                        ).toLocaleTimeString()}
+                      </p>
+                    ) : (
+                      <p>
+                        <strong>Delivered: </strong>
+                        <i className="fa fa-times" style={{ color: 'red' }}></i>
                       </p>
                     )}
                   </div>
                 </div>
                 <h3 className="cart-page-title">Your Ordered Items</h3>
 
-                <div className="row pb-20">
+                <div className="row">
                   <div className="col-12">
                     <div className="table-content table-responsive cart-table-content">
                       <table>
@@ -108,13 +129,27 @@ const Order = ({ location, currency, match, history }) => {
                             <th>Image</th>
                             <th>Product Name</th>
                             <th>Unit Price</th>
-                            <th>Discount</th>
                             <th>Qty</th>
                             <th>Subtotal</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {order.orderItems.map((item, key) => {
+                          {selectedOrder.orderItems.map((orderItem, key) => {
+                            const discountedPrice = getDiscountPrice(
+                              orderItem.price,
+                              orderItem.discount
+                            );
+                            const finalProductPrice =
+                              orderItem.price.toFixed(2);
+                            const finalDiscountedPrice = (
+                              discountedPrice || 0
+                            ).toFixed(2);
+
+                            discountedPrice != null
+                              ? (selectedOrder.totalPrice +=
+                                  finalDiscountedPrice * orderItem.quantity)
+                              : (selectedOrder.totalPrice +=
+                                  finalProductPrice * orderItem.quantity);
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
@@ -122,14 +157,14 @@ const Order = ({ location, currency, match, history }) => {
                                     to={
                                       process.env.PUBLIC_URL +
                                       '/product/' +
-                                      item.product
+                                      orderItem.id
                                     }
                                   >
                                     <img
                                       className="img-fluid"
                                       src={
                                         process.env.REACT_APP_API_URL +
-                                        item.image[0]
+                                        orderItem.image[0]
                                       }
                                       alt=""
                                     />
@@ -141,26 +176,57 @@ const Order = ({ location, currency, match, history }) => {
                                     to={
                                       process.env.PUBLIC_URL +
                                       '/product/' +
-                                      item.product
+                                      orderItem.id
                                     }
                                   >
-                                    {item.name}
+                                    {orderItem.name}
                                   </Link>
+                                  {orderItem.selectedProductColor &&
+                                  orderItem.selectedProductSize ? (
+                                    <div className="cart-item-variation">
+                                      <span>
+                                        Color: {orderItem.selectedProductColor}
+                                      </span>
+                                      <span>
+                                        Size: {orderItem.selectedProductSize}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    ''
+                                  )}
                                 </td>
+
                                 <td className="product-price-cart">
-                                  <span className="amount">{item.price}</span>
-                                </td>
-                                <td className="product-price-cart">
-                                  <span className="amount">
-                                    {item.discount}
-                                  </span>
+                                  {discountedPrice !== null ? (
+                                    <Fragment>
+                                      <span className="amount old">
+                                        {'Rs' + finalProductPrice}
+                                      </span>
+                                      <span className="amount">
+                                        {'Rs' + finalDiscountedPrice}
+                                      </span>
+                                    </Fragment>
+                                  ) : (
+                                    <span className="amount">
+                                      {'Rs' + finalProductPrice}
+                                    </span>
+                                  )}
                                 </td>
 
                                 <td className="product-quantity">
-                                  {item.quantity}
+                                  {orderItem.quantity}
                                 </td>
                                 <td className="product-subtotal">
-                                  {item.quantity * (item.price - item.discount)}
+                                  {discountedPrice !== null
+                                    ? currency.currencySymbol +
+                                      (
+                                        finalDiscountedPrice *
+                                        orderItem.quantity
+                                      ).toFixed(2)
+                                    : currency.currencySymbol +
+                                      (
+                                        finalProductPrice * orderItem.quantity
+                                      ).toFixed(2)}
                                 </td>
                               </tr>
                             );
@@ -171,44 +237,34 @@ const Order = ({ location, currency, match, history }) => {
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="col-lg-4 col-md-6"></div>
-
-                  <div className="col-lg-4 col-md-6"></div>
-
-                  <div className="col-lg-4 col-md-12">
-                    <div className="grand-totall">
-                      <div className="title-wrap">
-                        <h4 className="cart-bottom-title section-bg-gary-cart">
-                          Order Total
-                        </h4>
-                      </div>
-                      <h5>
-                        Total products{' '}
-                        <span>
-                          {currency.currencySymbol +
-                            order.totalPrice.toFixed(2)}
-                        </span>
-                      </h5>
-                      <h5>
-                        Shipping Price{' '}
-                        <span>
-                          {currency.currencySymbol +
-                            order.shippingPrice.toFixed(2)}
-                        </span>
-                      </h5>
-
-                      <h4 className="grand-totall-title">
-                        Grand Total{' '}
-                        <span>
-                          {currency.currencySymbol +
-                            (
-                              Number(order.totalPrice) +
-                              Number(order.shippingPrice)
-                            ).toFixed(2)}
-                        </span>
+                <div className="col-lg-4 col-md-12 mt-20">
+                  <div className="grand-totall">
+                    <div className="title-wrap">
+                      <h4 className="cart-bottom-title section-bg-gary-cart">
+                        Cart Total
                       </h4>
                     </div>
+                    <h5>
+                      Total products{' '}
+                      <span>
+                        {currency.currencySymbol +
+                          selectedOrder.totalPrice.toFixed(2)}
+                      </span>
+                    </h5>
+                    <h5>
+                      Shipping Price{' '}
+                      <span>
+                        {currency.currencySymbol +
+                          selectedOrder.shippingPrice.toFixed(2)}
+                      </span>
+                    </h5>
+                    <h4 className="grand-totall-title">
+                      Grand Total{' '}
+                      <span>
+                        {currency.currencySymbol +
+                          selectedOrder.totalPrice.toFixed(2)}
+                      </span>
+                    </h4>
                   </div>
                 </div>
               </Fragment>

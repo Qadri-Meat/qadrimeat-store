@@ -1,14 +1,13 @@
 import api from './api';
 
 class OrderService {
-  getAll(email) {
-    return api.get(`orders?email=${email}`);
+  getAll(phone) {
+    return api.get(`orders?phone=${phone}`);
   }
   get(id) {
     return api.get(`orders/${id}`);
   }
   create(data) {
-    console.log(data);
     return api.post(`orders`, data);
   }
 }

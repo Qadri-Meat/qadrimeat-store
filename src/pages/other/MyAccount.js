@@ -10,7 +10,7 @@ import LayoutOne from '../../layouts/LayoutOne';
 import Breadcrumb from '../../wrappers/breadcrumb/Breadcrumb';
 import { useToasts } from 'react-toast-notifications';
 import { updateUser, USER_RESET } from '../../redux/actions/userActions';
-import { fetchOrders } from '../../redux/actions/orderActions';
+import { getOrders } from '../../redux/actions/orderActions';
 const MyAccount = ({ location, history }) => {
   const { pathname } = location;
 
@@ -31,7 +31,7 @@ const MyAccount = ({ location, history }) => {
       setPassword('');
       setConfirmPassword('');
     } else {
-      dispatch(fetchOrders(user.email, 1, 10, addToast));
+      dispatch(getOrders(user.phone, addToast));
     }
   }, [history, user, success]);
 
@@ -128,13 +128,13 @@ const MyAccount = ({ location, history }) => {
                       </Card.Header>
                       <Accordion.Collapse eventKey="1">
                         <Card.Body>
-                          <div class="table-responsive">
-                            <table class="table">
+                          <div className="table-responsive">
+                            <table className="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">#</th>
+                                  <th scope="col">Order No</th>
                                   <th scope="col">Fullname</th>
-                                  <th scope="col">Paid</th>
+                                  <th scope="col">Approved</th>
                                   <th scope="col">Delivered</th>
                                   <th scope="col"></th>
                                 </tr>
@@ -150,8 +150,11 @@ const MyAccount = ({ location, history }) => {
                                           {order.shippingDetails.lastName}
                                         </td>
                                         <td>
-                                          {order.isPaid ? (
-                                            order.paidAt.substring(0, 10)
+                                          {order.approvedAt ? (
+                                            <i
+                                              className="fa fa-check"
+                                              style={{ color: 'green' }}
+                                            ></i>
                                           ) : (
                                             <i
                                               className="fa fa-times"
@@ -160,8 +163,11 @@ const MyAccount = ({ location, history }) => {
                                           )}
                                         </td>
                                         <td>
-                                          {order.isDelivered ? (
-                                            order.deliveredAt.substring(0, 10)
+                                          {order.deliveredAt ? (
+                                            <i
+                                              className="fa fa-check"
+                                              style={{ color: 'green' }}
+                                            ></i>
                                           ) : (
                                             <i
                                               className="fa fa-times"

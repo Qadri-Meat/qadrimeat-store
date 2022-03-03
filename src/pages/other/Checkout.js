@@ -9,13 +9,15 @@ import { getDiscountPrice } from '../../helpers/product';
 import LayoutOne from '../../layouts/LayoutOne';
 import Breadcrumb from '../../wrappers/breadcrumb/Breadcrumb';
 import { createOrder, ORDER_RESET } from '../../redux/actions/orderActions';
-
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import { useToasts } from 'react-toast-notifications';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Loader from '../../components/loader/Loader';
+import PhoneNumberInput from '../../components/input/PhoneNumberInput';
 
 const schema = yup.object().shape({
   firstName: yup.string().required('First Name is required'),
@@ -25,11 +27,11 @@ const schema = yup.object().shape({
   email: yup.string().email('Email is not valid'),
   phone: yup
     .string()
-    .required('Phone is required')
     .matches(
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
       'Phone number is not valid'
-    ),
+    )
+    .required(),
 });
 
 const Checkout = ({ location, cartItems, currency, history }) => {
@@ -37,12 +39,15 @@ const Checkout = ({ location, cartItems, currency, history }) => {
   let cartTotalPrice = 0;
   const dispatch = useDispatch();
   const { addToast } = useToasts();
-  const { success, order, loading, shippingDetails } = useSelector(
-    (state) => state.orderData
-  );
+  const shippingDetails = localStorage.getItem('shippingDetails')
+    ? JSON.parse(localStorage.getItem('shippingDetails'))
+    : {};
+  delete shippingDetails.notes;
+  const { success, order, loading } = useSelector((state) => state.orderData);
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
@@ -71,15 +76,15 @@ const Checkout = ({ location, cartItems, currency, history }) => {
         price: item.price,
         discount: item.discount || 0,
         image: item.image,
+        discount: item.discount,
       };
     });
     const newOrder = {
+      phone: shippingDetails.phone,
       orderItems: orderItems,
       shippingDetails: shippingDetails,
-      paymentMethod: 'Cash on delivery',
       shippingPrice: 0,
       totalPrice: cartTotalPrice,
-      isPaid: false,
     };
     dispatch(createOrder(newOrder, addToast));
   };
@@ -188,16 +193,20 @@ const Checkout = ({ location, cartItems, currency, history }) => {
                           </div>
                         </div>
                         <div className="col-lg-6 col-md-6">
-                          <div className="billing-info mb-20">
+                          <div className="mb-20">
                             <label>Phone*</label>
-                            <input
-                              type="text"
-                              {...register('phone')}
-                              className={`${errors.phone ? 'is-invalid' : ''}`}
+                            <PhoneNumberInput
+                              ref={register}
+                              control={control}
+                              id="phone"
+                              name="phone"
+                              country={'pk'}
                             />
-                            <div className="invalid-feedback">
-                              {errors.phone?.message}
-                            </div>
+                            {errors.phone && (
+                              <p className="error-message text-danger">
+                                {errors.phone?.message}
+                              </p>
+                            )}
                           </div>
                         </div>
                         <div className="col-lg-6 col-md-6">

@@ -2,7 +2,8 @@ import {
   CREATE_ORDER_SUCCESS,
   ORDER_RESET,
   ORDER_REQUEST,
-  FETCH_ORDER_SUCCESS,
+  GET_ORDERS_SUCCESS,
+  GET_ORDER_SUCCESS,
 } from '../actions/orderActions';
 
 const initState = {};
@@ -10,16 +11,16 @@ const initState = {};
 const orderReducer = (state = initState, action) => {
   switch (action.type) {
     case ORDER_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
+    case GET_ORDER_SUCCESS:
+      console.log('totalPrice', action.payload.totalPrice);
+      return { loading: false, selectedOrder: action.payload };
     case CREATE_ORDER_SUCCESS:
-      return { ...state, loading: false, success: true, order: action.payload };
-    case FETCH_ORDER_SUCCESS:
-      return { ...state, ...action.payload };
+      return { loading: false, success: true };
+    case GET_ORDERS_SUCCESS:
+      return { loading: false, ...action.payload };
     case ORDER_RESET:
-      return {
-        ...state,
-        success: false,
-      };
+      return {};
     default:
       return state;
   }
