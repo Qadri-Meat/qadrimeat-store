@@ -88,6 +88,7 @@ const ProductImageGallery = ({ product }) => {
                         src={process.env.REACT_APP_API_URL + single}
                         className="img-fluid"
                         alt=""
+                        style={{ height: '400px', objectFit: 'cover' }}
                       />
                     </div>
                   </div>
@@ -107,6 +108,7 @@ const ProductImageGallery = ({ product }) => {
                       src={process.env.REACT_APP_API_URL + single}
                       className="img-fluid"
                       alt=""
+                      style={{ height: 100, objectFit: 'cover' }}
                     />
                   </div>
                 </div>

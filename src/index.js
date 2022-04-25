@@ -36,7 +36,7 @@ const store = createStore(rootReducer, initialState, devTools);
 setupInterceptors(store);
 // fetch products from json file
 store.dispatch(setCurrency('PKR'));
-store.dispatch(fetchProducts(1, 10));
+store.dispatch(fetchProducts(1, 100));
 
 ReactDOM.render(
   <Provider store={store}>

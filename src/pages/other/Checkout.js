@@ -78,7 +78,6 @@ const Checkout = ({ location, cartItems, currency, history }) => {
         price: item.price,
         discount: item.discount || 0,
         image: item.image,
-        discount: item.discount,
       };
     });
     const newOrder = {

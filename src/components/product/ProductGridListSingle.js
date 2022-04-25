@@ -43,6 +43,10 @@ const ProductGridListSingle = ({
                 className="default-img"
                 src={process.env.REACT_APP_API_URL + product.image[0]}
                 alt=""
+                style={{
+                  height: '200px',
+                  objectFit: 'cover',
+                }}
               />
               {product.image.length > 1 ? (
                 <img

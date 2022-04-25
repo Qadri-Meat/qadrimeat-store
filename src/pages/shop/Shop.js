@@ -12,6 +12,8 @@ import ShopTopbar from '../../wrappers/product/ShopTopbar';
 import ShopProducts from '../../wrappers/product/ShopProducts';
 
 const ShopGridRightSidebar = ({ location, products }) => {
+  let category = location.search.split('=')[1];
+
   const [layout, setLayout] = useState('grid three-column');
   const [sortType, setSortType] = useState('');
   const [sortValue, setSortValue] = useState('');
@@ -40,6 +42,10 @@ const ShopGridRightSidebar = ({ location, products }) => {
   };
 
   useEffect(() => {
+    if (category) {
+      setSortType('category');
+      setSortValue(category);
+    }
     let sortedProducts = getSortedProducts(products, sortType, sortValue);
     const filterSortedProducts = getSortedProducts(
       sortedProducts,
@@ -49,7 +55,15 @@ const ShopGridRightSidebar = ({ location, products }) => {
     sortedProducts = filterSortedProducts;
     setSortedProducts(sortedProducts);
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
-  }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
+  }, [
+    offset,
+    products,
+    sortType,
+    sortValue,
+    filterSortType,
+    filterSortValue,
+    category,
+  ]);
 
   return (
     <Fragment>
