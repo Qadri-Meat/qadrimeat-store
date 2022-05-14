@@ -15,6 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import setupInterceptors from './redux/services/setupInterceptors';
 import { setCurrency } from './redux/actions/currencyActions';
+import { fetchDeals } from './redux/actions/dealActions';
 
 const middlewares = [thunk];
 
@@ -37,6 +38,7 @@ setupInterceptors(store);
 // fetch products from json file
 store.dispatch(setCurrency('PKR'));
 store.dispatch(fetchProducts(1, 100));
+store.dispatch(fetchDeals(1, 100));
 
 ReactDOM.render(
   <Provider store={store}>

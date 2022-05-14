@@ -12,8 +12,10 @@ const Home = lazy(() => import('./pages/home/Home'));
 const Order = lazy(() => import('./pages/other/Order'));
 // shop pages
 const Shop = lazy(() => import('./pages/shop/Shop'));
+const Deals = lazy(() => import('./pages/shop/Shop1'));
 // product pages
 const Product = lazy(() => import('./pages/shop-product/Product'));
+const Deal = lazy(() => import('./pages/shop-product/Deal'));
 
 // blog pages
 const BlogStandard = lazy(() => import('./pages/blog/BlogStandard'));
@@ -72,6 +74,11 @@ const App = (props) => {
                 />
                 <Route
                   exact
+                  path={process.env.PUBLIC_URL + '/deals'}
+                  component={Deals}
+                />
+                <Route
+                  exact
                   path={process.env.PUBLIC_URL + '/order/:id'}
                   component={Order}
                 />
@@ -87,6 +94,13 @@ const App = (props) => {
                   path={process.env.PUBLIC_URL + '/product/:id'}
                   render={(routeProps) => (
                     <Product {...routeProps} key={routeProps.match.params.id} />
+                  )}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + '/deal/:id'}
+                  render={(routeProps) => (
+                    <Deal {...routeProps} key={routeProps.match.params.id} />
                   )}
                 />
 
